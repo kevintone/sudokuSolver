@@ -8,7 +8,7 @@
 import java.util.Scanner;
 
 
-public class SudokuSolver() {
+public class SudokuSolver {
 	
 	private int boardArray[][];
 	private Scanner scan;
@@ -30,12 +30,12 @@ public class SudokuSolver() {
 			
 			//If line != 9 --> wrongly entered and reinput line
 			if (input.length() != 9) {
-				System.out.println("Please enter a valid line);
+				System.out.println("Please enter a valid line");
 				//Decrement i to re-enter the line
 				i = i-1;
 			} else {
 				for (int j = 0; j < 9; j++) {
-					boardArray[i][j] = Integer.parseInt(input.charAt(j));
+					boardArray[i][j] = Character.getNumericValue(input.charAt(j));
 				}
 			}
 		}

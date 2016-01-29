@@ -157,20 +157,19 @@ public class SudokuSolver {
 		
 		if(row == 10)
 		{
-			return false;
+			return true;
 		} 
 
 		for(int i = 1; i < 10; i++)
 		{
 			boardArray[row][column] = i;
-			
-			//System.out.println("Row: " + row + " Col: " + column);
-			//System.out.println("checkRow: " + checkRow());
-			System.out.println("checkColumn: " + checkColumn());
-			
+					
 			if(checkRow() && checkColumn() && checkSquare(row,column))
 			{
+				
+				System.out.println("");
 				printBoard();
+				System.out.println();
 				if(solveSudoku())
 				{
 					return true;

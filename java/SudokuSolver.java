@@ -23,6 +23,8 @@ public class SudokuSolver {
 		//Print the user inputted board
 		printBoard();
 		solveSudoku();
+		System.out.println("Solution: ");
+		printBoard();
 	}
 	
 	public void getBoard() {
@@ -97,7 +99,7 @@ public class SudokuSolver {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				for (int k = j+1; j<9; j++) {
-					if (boardArray[j][i] !=0 && boardArray[j][i] != boardArray[j][k]) {
+					if (boardArray[j][i] !=0 && boardArray[j][i] != boardArray[k][i]) {
 						return false;
 					}
 				}
@@ -113,15 +115,19 @@ public class SudokuSolver {
 	* given the row and column of the square its working on
 	*/
 	public boolean checkSquare(int numRow, int numCol) {
-		int row = (numRow * 3) / 3;
-		int col = (numCol * 3) / 3;
+		int row = (numRow / 3) * 3;
+		int col = (numCol / 3) * 3;
 		
+		System.out.println("Row: " + row);
+		System.out.println("Col: " + col);
+	
 		ArrayList<Integer> duplicateCheck = new ArrayList<Integer>();
 
-		for(int i = row; i < row + 3; i++) 
+		for(int i = row; i < (row+3); i++) 
 		{
-			for (int j = col; j < col+3; i++)
+			for (int j = col; j < (col+3); j++)
 			{
+				System.out.println("i: " + i + " j: " + j);
 				if (boardArray[i][j] !=0)
 				{
 					duplicateCheck.add(boardArray[i][j]);
@@ -149,21 +155,29 @@ public class SudokuSolver {
 		
 		if(row == 10)
 		{
+			System.out.println("Here");
 			return false;
 		} 
 
 		for(int i = 1; i < 10; i++)
 		{
+			System.out.println("Here");
 			boardArray[row][column] = i;
+
+			System.out.println("checkRow: " + checkRow());
+			System.out.println("checkColumn: " + checkColumn());
+			System.out.println("checkSquare: " + checkSquare(row,column));
 			if(checkRow() && checkColumn() && checkSquare(row,column))
 			{
+				printBoard();
 				if(solveSudoku())
 				{
 					return true;
 				}
 			}
 		}
-
+		
+		boardArray[row][column] = 0;
 		return false;
 	}
 
@@ -179,7 +193,7 @@ public class SudokuSolver {
 				}
 			}
 		}
-		return new int[] {10};
+		return new int[] {10,10};
 	}
 		
 	public static void main(String[] args) {

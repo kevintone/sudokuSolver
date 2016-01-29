@@ -68,6 +68,16 @@ public class SudokuSolver {
 		return true;
 
 	}
+	
+	/*public boolean checkValid()
+	{
+		if(checkColumn() && checkRow() && checkSquare())
+		{
+			return true;
+		} 
+
+		return false;
+	}*/
 
 	public boolean checkColumn() {
 		for (int i = 0; i < 9; i++) {
@@ -114,32 +124,46 @@ public class SudokuSolver {
 			{
 				if (boardArray[i][j] !=0)
 				{
-					duplicateCheck.add(boardArray[i][j];
-				}
-			}
-
-			for(int i=0; i < duplicateCheck.size(); i++)
-			{
-				for (int j=i+1; j < duplicateCheck.size(); j++)
-				{
-					if(duplicateCheck.get(i) == duplicateCheck.get(j))
-					{
-						return false
-					}
+					duplicateCheck.add(boardArray[i][j]);
 				}
 			}
 		}
-		
+		for(int i = 0; i<duplicateCheck.size(); i++)
+		{
+			for(int j = i+1; j < duplicateCheck.size(); j++)
+			{
+				if(duplicateCheck.get(i) == duplicateCheck.get(j))
+				{
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 	
 	
-	public void solveSudoku() {
-		solveSudoku(0,0);
-		printBoard();
-	}
+	private boolean solveSudoku() {
+		int[] emptyBox = findEmptySpace();
+		int row = emptyBox[0];
+		int column = emptyBox[1];
+		
+		if(row == 10)
+		{
+			return false;
+		} 
 
-	private  boolean solveSudoku(int row, int column) {
+		for(int i = 1; i < 10; i++)
+		{
+			boardArray[row][column] = i;
+			if(checkRow() && checkColumn() && checkSquare(row,column))
+			{
+				if(solveSudoku())
+				{
+					return true;
+				}
+			}
+		}
+
 		return false;
 	}
 

@@ -6,7 +6,7 @@
  */
 
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class SudokuSolver {
 	
@@ -133,13 +133,29 @@ public class SudokuSolver {
 		return true;
 	}
 	
+	
 	public void solveSudoku() {
 		solveSudoku(0,0);
 		printBoard();
 	}
 
-	public boolean solveSudoku(int row, int column) {
+	private  boolean solveSudoku(int row, int column) {
 		return false;
+	}
+
+	private int[] findEmptySpace()
+	{
+		for(int i = 0; i < 9; i ++)
+		{
+			for(int j = 0; j < 9; j++)
+			{
+				if (boardArray[i][j] == 0)
+				{
+					return new int[] {i, j};
+				}
+			}
+		}
+		return new int[] {10};
 	}
 		
 	public static void main(String[] args) {

@@ -81,7 +81,7 @@ public class SudokuSolver {
 		return false;
 	}*/
 
-	public boolean checkColumn() {
+	public boolean checkRow() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				for (int k = j+1; k < 9; k++) {
@@ -95,7 +95,7 @@ public class SudokuSolver {
 		return true;
 	}
 
-	public boolean checkRow() {
+	public boolean checkColumn() {
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				for (int k = j+1; j<9; j++) {
